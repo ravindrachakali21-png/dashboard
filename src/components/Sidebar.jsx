@@ -74,7 +74,9 @@ export default function Sidebar({ activePage, onNavigate, isOpen, onClose }) {
             ${activePage === "settings" ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-100"}`}>
           <Settings size={17} /> Settings
         </button>
-        <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <button
+          onClick={() => onNavigate("logout")}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
           <LogOut size={17} /> Logout
         </button>
       </div>
