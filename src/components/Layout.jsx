@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Sidebar from "./Sidebar";
 import Navbar  from "./Navbar";
 
 export default function Layout({ activePage, onNavigate, children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const mainRef = useRef(null);
 
   const handleNavigate = (page) => {
     onNavigate(page);
     setSidebarOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Scroll the main content area to top
+    if (mainRef.current) {
+      mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -34,7 +38,7 @@ export default function Layout({ activePage, onNavigate, children }) {
           onMenuClick={() => setSidebarOpen(true)}
           onNavigate={handleNavigate}
         />
-        <main className="flex-1 overflow-y-auto">
+        <main ref={mainRef} className="flex-1 overflow-y-auto">
           {children}
         </main>
       </div>
